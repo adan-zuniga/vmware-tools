@@ -78,6 +78,7 @@ def list_os(os_info):
 
 
 ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\Software\CUC_12.5_v1.0.ova'
+# ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\Crystal Clinic\cucm_14.0_vmv13_v1.1.ova'
 # ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\cucm_10.5_vmv8_v2.0.ova'
 # ova_path = r'C:\Users\adanzun\Downloads\s42700x12_7_1_v6.5.ova'
 ovf_handle = OvfHandler(ovafile=ova_path)
@@ -92,7 +93,6 @@ ovf_id = virtual_system['ovf:id']
 print(ovf_id)
 # virtual_hardware = list_os(virtual_system)
 list_os(virtual_system.OperatingSystemSection)
-exit()
 product_info = virtual_system.ProductSection
 
 virtual_hardware = virtual_system.VirtualHardwareSection

@@ -69,7 +69,7 @@ class OvfHandler(object):
         for device_url in lease.info.deviceUrl:
             if device_url.importKey == file_item.deviceId:
                 return device_url
-        raise Exception("Failed to find deviceUrl for file %s" % file_item.path)
+        raise Exception(f'Failed to find deviceUrl for file {file_item.path}')
 
     def upload_disks(self, lease, host):
         """
@@ -81,14 +81,14 @@ class OvfHandler(object):
             for fileItem in self.spec.fileItem:
                 self.upload_disk(fileItem, lease, host)
             lease.Complete()
-            print("Finished deploy successfully.")
+            print('Finished deploy successfully.')
             return 0
         except vmodl.MethodFault as ex:
-            print("Hit an error in upload: %s" % ex)
+            print(f'Hit an error in upload: {ex}')
             lease.Abort(ex)
         except Exception as ex:
-            print("Lease: %s" % lease.info)
-            print("Hit an error in upload: %s" % ex)
+            print(f'Lease: {lease.info}')
+            print(f'Hit an error in upload: {ex}')
             lease.Abort(vmodl.fault.SystemError(reason=str(ex)))
         return 1
 

@@ -28,9 +28,9 @@ def update_virtual_machine():
 
     vm_object = vm_obj
     cdrom_label = 'CD/DVD drive 1'
-    vm_config = vm_object.config
-    print(vm_config.cpuAllocation)
-    print(vm_config.memmoryAllocation)
+    # vm_config = vm_object.config
+    # print(vm_config.cpuAllocation)
+    # print(vm_config.memmoryAllocation)
     virtual_cdrom_device = None
     for dev in vm_object.config.hardware.device:
         if isinstance(dev, vim.vm.device.VirtualCdrom) and dev.deviceInfo.label == cdrom_label:

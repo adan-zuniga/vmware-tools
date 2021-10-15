@@ -20,14 +20,17 @@ from samples.tools import cli, service_instance
 
 from pyVmomi import vim, vmodl
 
+from utilities.home_esxi import ESXi
+
 __author__ = 'azuniga'
 
 
 def main():
-    parser = cli.Parser()
-    parser.add_optional_arguments(cli.Argument.OVA_PATH, cli.Argument.DATACENTER_NAME,
-                                  cli.Argument.RESOURCE_POOL, cli.Argument.DATASTORE_NAME)
-    args = parser.get_args()
+    # parser = cli.Parser()
+    # parser.add_optional_arguments(cli.Argument.OVA_PATH, cli.Argument.DATACENTER_NAME,
+    #                               cli.Argument.RESOURCE_POOL, cli.Argument.DATASTORE_NAME)
+    # args = parser.get_args()
+    args = ESXi()
     si = service_instance.connect(args)
 
     if args.datacenter_name:
@@ -55,6 +58,8 @@ def main():
     cisp = vim.OvfManager.CreateImportSpecParams()
     cisr = ovf_manager.CreateImportSpec(
         ovf_handle.get_descriptor(), resource_pool, datastore, cisp)
+    a = True
+    exit(a)
 
     # These errors might be handleable by supporting the parameters in
     # CreateImportSpecParams
