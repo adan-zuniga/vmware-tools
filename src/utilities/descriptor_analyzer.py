@@ -7,5 +7,3 @@ def get_net_ints(ovf_xml):
     network_section = envelope.NetworkSection
     interface = network_section.Network['ovf:name']
     return interface
-    # net_description = network_section.Network.Description.cdata
-    # print(net_description)

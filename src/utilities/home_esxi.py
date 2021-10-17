@@ -13,7 +13,7 @@ class ESXi:
         self.resource_pool = ''
         self.ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\Software\CUC_12.5_v1.0.ova'
         self.disk_provision = 'thin'
-        self.vm_name = 'OLD UCXN'
+        self.vm_name = '10-17-2021 UCXN'
         self.deployment = 'CUC-Overlay-1'
         self.datastore_name = 'datastore1'
 

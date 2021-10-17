@@ -1,4 +1,4 @@
-from utilities.virtualtemplates import OvfHandler
+from samples.deploy_ova import OvfHandler
 from collections import defaultdict
 import untangle
 
