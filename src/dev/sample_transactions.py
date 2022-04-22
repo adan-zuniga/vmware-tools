@@ -76,66 +76,6 @@ def get_dir(o):
             print(f'{d:_<50}', getattr(o, d))
 
 
-def get_networks(service_instance):
-    content = service_instance.RetrieveContent()
-    container = content.rootFolder
-    # print(container)
-    # print(vim.ServiceInstance)
-    container_view = content.viewManager.CreateContainerView(
-        container=container, type=[vim.Network], recursive=True
-    )
-
-    networks = container_view.view
-    for network in networks:
-        print(f'{network.name:#^180}')
-        vms = network.vm
-        for vm in vms:
-            print(vm.name)
-            print(vm.config.guestFullName)
-
-
-def analyze(service_instance):
-
-    content = service_instance.RetrieveContent()
-    container = content.rootFolder
-    container_view = content.viewManager.CreateContainerView(
-        container=container, type=[], recursive=True
-        # container=container, type=[vim.HostSystem], recursive=True
-    )
-    hosts = container_view.view
-
-    [get_dir(x) for x in hosts.datastore]
-    # for host in hosts:
-    #     get_dir(host)
-        # print(host.name)
-        # print(host.hardware.systemInfo.vendor)
-        # print(host.hardware.systemInfo.model)
-        # print(host.hardware.systemInfo.serialNumber)
-        # print(host.hardware.cpuInfo)
-        # # print(host.hardware.cpuPkg)
-        # for cpu in host.hardware.cpuPkg:
-        #
-        #     print(cpu.vendor)
-        #     print(cpu.description)
-        #     print(cpu.hz)
-        # print(host.hardware.memorySize)
-        # print(host.hardware)
-        # print(host.config.network.pnic)
-        # print(host.config.network.dnsConfig.hostName)
-        # print(host.config.network.ipRouteConfig)
-        # print(host.config.network.routeTableInfo)
-        # print(host.config.network.dhcp)
-        # print(host.config.network.netStackInstance)
-
-        # LRO Settings
-        # ov = host.config.option
-        # print(ov)
-        # for o in ov:
-        #     print(o.key, o.value)
-
-        # get_dir(host)
-
-
 def get_licence(service_instance):
     licenses = service_instance.content.licenseManager.licenses
     for esxi_license in licenses:
@@ -165,7 +105,7 @@ def shutdown_cucm(service_instance):
         container=container, type=[], recursive=True
     )
     for entity in container_view.view:
-        if entity.name == 'VIRL':
+        if entity.name == 'Fedora':
             # entity.PowerOn()
             # get_dir(entity.config.hardware.device)
             devices = entity.config.hardware.device

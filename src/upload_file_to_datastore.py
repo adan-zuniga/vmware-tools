@@ -17,8 +17,8 @@ class Values:
         self.user = 'root'
         self.password = 'l4bp$$D'
         self.datastore_name = 'datastore1'
-        self.local_file_path = r"C:\Users\adanzun\Downloads\Bootable_UCSInstall_CER_12.5.1.23900-19.sgn.iso"
-        self.remote_file_path = r'ISOs/UC/Bootable_UCSInstall_CER_12.5.1.23900-19.sgn.iso'
+        self.local_file_path = r"C:\Users\adanzun\Downloads\Bootable_UCSInstall_UCOS_12.5.1.15900-66.sgn.iso"
+        self.remote_file_path = r'ISOs/UC/Bootable_UCSInstall_UCOS_12.5.1.15900-66.sgn.iso'
 
 
 def main():

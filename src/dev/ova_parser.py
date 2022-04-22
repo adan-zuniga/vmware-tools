@@ -3,9 +3,18 @@ from collections import defaultdict
 import untangle
 
 
-resource_dict = {3: 'vCPU', 4: 'vRAM', 5: 'IDE Controller', 6: 'Parallel SCSI HBA',
-                 10: 'Ethernet Adapter', 14: 'Floppy Drive', 15: 'CD Drive',
-                 17: 'vDisk Drive', 23: 'USB Controller', 24: 'Graphics controller'}
+resource_dict = {
+    3: 'vCPU',
+    4: 'vRAM',
+    5: 'IDE Controller',
+    6: 'Parallel SCSI HBA',
+    10: 'Ethernet Adapter',
+    14: 'Floppy Drive',
+    15: 'CD Drive',
+    17: 'vDisk Drive',
+    23: 'USB Controller',
+    24: 'Graphics controller'
+}
 
 
 def list_deployment_types(deployment_list, hw_dict_in):
@@ -42,7 +51,6 @@ def list_vir_hardware(vh):
     # print(virtual_hardware_dict)
     for item in vh.Item:
         deployment_type = item['ovf:configuration'] or 'Shared'
-        # print(deployment_type)
         al_units = is_global_resource(item, 'rasd_AllocationUnits')
         vh_kind = item.rasd_ElementName.cdata
         reservation = is_global_resource(item, 'rasd_Reservation')
@@ -68,25 +76,28 @@ def list_vir_hardware(vh):
 def list_os(os_info):
     ovf_version = os_info['ovf:version']
     os_type = os_info['vmw:osType']
-    os_info = os_info.Description.cdata
-
+    # os_info = os_info.Description.cdata
+    # vars(os_info)
     print(ovf_version)
-    print(os_info)
+    # print(os_info)
     print(os_type)
     # list_vir_hardware(vir_system.VirtualHardwareSection)
     # return vir_system.VirtualHardwareSection
 
 
-ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\Software\CUC_12.5_v1.0.ova'
+# ova_path = r'C:\Users\adanzun\Downloads\cucm_12.5_vmv13_v1.0.ova'
 # ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\Crystal Clinic\cucm_14.0_vmv13_v1.1.ova'
 # ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\cucm_10.5_vmv8_v2.0.ova'
 # ova_path = r'C:\Users\adanzun\Downloads\s42700x12_7_1_v6.5.ova'
+# ova_path = r'C:\Users\adanzun\Downloads\s42700x14_0_4.ova'
+# ova_path = r'C:\Users\adanzun\Downloads\cucm_14.0_vmv13_v1.1.ova'
+ova_path = r'C:\Users\adanzun\Downloads\cer_14.0_vmv13_v1.0.ova'
 ovf_handle = OvfHandler(ovafile=ova_path)
 
 ovf_xml = ovf_handle.get_descriptor()
 ova_descriptor_obj = untangle.parse(ovf_xml)
 envelope = ova_descriptor_obj.Envelope
-
+# print(envelope.VirtualSystem.ProductSection.Property)
 # Virtual System
 virtual_system = envelope.VirtualSystem
 ovf_id = virtual_system['ovf:id']
