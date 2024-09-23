@@ -1,4 +1,4 @@
-from pyVmomi import vim
+from pyVmomi import vim, vmodl
 
 
 def get_dc(args, si):
@@ -88,3 +88,19 @@ def get_net_mappings(args, datacenter):
         raise Exception(f'Failed to find network named {args.network}')
     else:
         raise Exception(f'Failed to find network named {args.network}')
+
+def get_obj(content, vim_type=None, name=None):
+    obj = None
+    container = content.viewManager.CreateContainerView(content.rootFolder, type=vim_type, recursive=True)
+    # container = content.viewManager.CreateContainerView(content.rootFolder, recursive=True)
+    for c in container.view:
+        print(f'{type(c).__name__: <25} {c.name}')
+        print(c.config.vAppConfig)
+    if name:
+        for c in container.view:
+            if c.name == name:
+                obj = c
+                return obj
+    else:
+        obj = [item for item in container.view]
+        return obj

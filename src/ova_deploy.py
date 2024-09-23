@@ -4,23 +4,8 @@ from samples.deploy_ova import OvfHandler
 import time
 from utilities.crawler import get_dc, get_data_store, get_resource_pool, get_net_mappings
 from utilities.home_esxi import ESXi
+from src.utilities import deploy_to_vmware
 from utilities.descriptor_analyzer import get_net_ints
-
-
-def deploy_to_vmware(vmware_lease, ovf__handle):
-
-    while vmware_lease.state == vim.HttpNfcLease.State.initializing:
-        print('Waiting for lease to be ready...')
-        time.sleep(1)
-
-    if vmware_lease.state == vim.HttpNfcLease.State.error:
-        print(f'Lease error: {vmware_lease.error}')
-        return 1
-    if vmware_lease.state == vim.HttpNfcLease.State.done:
-        return 0
-
-    print('Starting deploy...')
-    return ovf__handle.upload_disks(vmware_lease, args.host)
 
 
 if __name__ == '__main__':
@@ -84,13 +69,5 @@ if __name__ == '__main__':
             print(d.device, end='\n' * 3)
 
 
-    if cisr.error:
-        print("The following errors will prevent import of this OVA:")
-        for error in cisr.error:
-            print(f'{error}')
-            exit()
-    else:
-        ovf_handle.set_spec(cisr)
 
-        lease = rp.ImportVApp(spec=cisr.importSpec, folder=dc.vmFolder)
-        deploy_to_vmware(vmware_lease=lease, ovf__handle=ovf_handle)
+    deploy_to_vmware(cisr, rp, dc, ovf_handle, args)

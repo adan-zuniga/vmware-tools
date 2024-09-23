@@ -1,0 +1,166 @@
+(vim.vApp.VmConfigSpec) {
+   dynamicType = <unset>,
+   dynamicProperty = (vmodl.DynamicProperty) [],
+   product = (vim.vApp.ProductSpec) [
+      (vim.vApp.ProductSpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.ProductInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 0,
+            classId = '',
+            instanceId = '',
+            name = 'CentOS Custom Image for ACE POD',
+            vendor = '',
+            version = '',
+            fullVersion = '',
+            vendorUrl = '',
+            productUrl = '',
+            appUrl = ''
+         }
+      }
+   ],
+   property = (vim.vApp.PropertySpec) [
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 0,
+            classId = '',
+            instanceId = '',
+            id = '5dns0',
+            category = 'DNS',
+            label = 'Primary DNS',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = '10.0.1.20',
+            description = ''
+         }
+      },
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 1,
+            classId = '',
+            instanceId = '',
+            id = '6dns1',
+            category = 'DNS',
+            label = 'Secondary DNS',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = '8.8.8.8',
+            description = ''
+         }
+      },
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 2,
+            classId = '',
+            instanceId = '',
+            id = '1ip0',
+            category = 'Network properties',
+            label = 'IP',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = '10.0.1.130',
+            description = ''
+         }
+      },
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 3,
+            classId = '',
+            instanceId = '',
+            id = '2netmask0',
+            category = 'Network properties',
+            label = 'Netmask(use CIDR notation)',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = '24',
+            description = ''
+         }
+      },
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 4,
+            classId = '',
+            instanceId = '',
+            id = '3gateway',
+            category = 'Network properties',
+            label = 'Gateway',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = '10.0.1.1',
+            description = ''
+         }
+      },
+      (vim.vApp.PropertySpec) {
+         dynamicType = <unset>,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         operation = 'add',
+         removeKey = <unset>,
+         info = (vim.vApp.PropertyInfo) {
+            dynamicType = <unset>,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = 5,
+            classId = '',
+            instanceId = '',
+            id = '4hostname',
+            category = 'Network properties',
+            label = 'Hostname',
+            type = 'string',
+            typeReference = <unset>,
+            userConfigurable = true,
+            defaultValue = '',
+            value = 'Ares',
+            description = ''
+         }
+      }
+   ],
+   ipAssignment = <unset>,
+   eula = (str) [],
+   ovfSection = (vim.vApp.OvfSectionSpec) [],
+   ovfEnvironmentTransport = (str) [],
+   installBootRequired = <unset>,
+   installBootStopDelay = <unset>
+}

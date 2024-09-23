@@ -1,6 +1,7 @@
 from samples.deploy_ova import OvfHandler
 from collections import defaultdict
 import untangle
+from src.utilities.home_esxi import ESXi
 
 
 resource_dict = {
@@ -32,8 +33,8 @@ def list_deployment_types(deployment_list, hw_dict_in):
 def list_net_interfaces(net_section):
     interface = net_section.Network['ovf:name']
     net_description = net_section.Network.Description.cdata
-    print(interface)
-    print(net_description)
+    print(f'Interface Name: {interface}')
+    print(f'Interface Description: {net_description}')
 
 
 def is_global_resource(o, resource_attribute):
@@ -78,42 +79,61 @@ def list_os(os_info):
     os_type = os_info['vmw:osType']
     # os_info = os_info.Description.cdata
     # vars(os_info)
-    print(ovf_version)
+    # print(ovf_version)
     # print(os_info)
     print(os_type)
     # list_vir_hardware(vir_system.VirtualHardwareSection)
     # return vir_system.VirtualHardwareSection
 
+def extract_envelope_xml_element(_ova_path):
+    """
+    Parse OVA file and return the envelope XML element.
 
-# ova_path = r'C:\Users\adanzun\Downloads\cucm_12.5_vmv13_v1.0.ova'
-# ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\Crystal Clinic\cucm_14.0_vmv13_v1.1.ova'
-# ova_path = r'C:\Users\adanzun\OneDrive - CDW\Customers\ULTA\cucm_10.5_vmv8_v2.0.ova'
-# ova_path = r'C:\Users\adanzun\Downloads\s42700x12_7_1_v6.5.ova'
-# ova_path = r'C:\Users\adanzun\Downloads\s42700x14_0_4.ova'
-# ova_path = r'C:\Users\adanzun\Downloads\cucm_14.0_vmv13_v1.1.ova'
-ova_path = r'C:\Users\adanzun\Downloads\cer_14.0_vmv13_v1.0.ova'
-ovf_handle = OvfHandler(ovafile=ova_path)
+    untangle is used to convert XML to Python objects.
+    """
 
-ovf_xml = ovf_handle.get_descriptor()
-ova_descriptor_obj = untangle.parse(ovf_xml)
-envelope = ova_descriptor_obj.Envelope
-# print(envelope.VirtualSystem.ProductSection.Property)
-# Virtual System
-virtual_system = envelope.VirtualSystem
-ovf_id = virtual_system['ovf:id']
-print(ovf_id)
-# virtual_hardware = list_os(virtual_system)
-list_os(virtual_system.OperatingSystemSection)
-product_info = virtual_system.ProductSection
+    ovf_handle = OvfHandler(ovafile=_ova_path)
 
-virtual_hardware = virtual_system.VirtualHardwareSection
-hw_dict = list_vir_hardware(virtual_hardware)
+    ovf_xml = ovf_handle.get_descriptor()
+    ova_descriptor_obj = untangle.parse(ovf_xml)
+    # my_mappings = {}
+    # for prop in ova_descriptor_obj.Envelope.VirtualSystem.ProductSection.Property:
+    #     if prop['ovf:userConfigurable'] == 'true':
+    #         my_mappings[prop['ovf:key']] = prop['ovf:value']
+    # # k = ova_descriptor_obj.Envelope.VirtualSystem.ProductSection.Property[0]['ovf:key']
+    # # ova_descriptor_obj.Envelope.VirtualSystem.ProductSection.Property[0]['ovf:userConfigurable']
+    # # ova_descriptor_obj.Envelope.VirtualSystem.ProductSection.Property[0]['ovf:value']
+    # print(my_mappings)
+    envelope_element = ova_descriptor_obj.Envelope
+    return envelope_element
 
-# Deployment Types
-configurations = envelope.DeploymentOptionSection.Configuration
-list_deployment_types(configurations, hw_dict)
 
-# Networks
-# network_section = envelope.NetworkSection
-# list_net_interfaces(network_section)
+if __name__ == '__main__':
+    args = ESXi()
 
+    # ova_path = r"C:\Users\adanzun\OVA\UCSInstall_CUP_14.0.1.12901-1_80d_vmv13_v1.0.ova"
+    ova_path = r"C:\Users\adanzun\OVA\UCSInstall_CUC_14.0.1.12900-69_200_vmv13_v1.0.ova"
+    # ova_path = r"C:\Users\adanzun\OVA\s42700x14_3_1.ova"
+    # ova_path = r"C:\Users\adanzun\OVA\centOSTemplate.ova"
+
+
+    envelope = extract_envelope_xml_element(ova_path)
+
+    virtual_system = envelope.VirtualSystem  # VM vHardware requirements, OS, etc.
+    # ovf_id = virtual_system['ovf:id']
+    # print(ovf_id)
+    # virtual_hardware = list_os(virtual_system)
+    list_os(virtual_system.OperatingSystemSection)
+    # product_info = virtual_system.ProductSection
+
+    #Virtual Hardware
+    virtual_hardware = virtual_system.VirtualHardwareSection
+    hw_dict = list_vir_hardware(virtual_hardware)
+
+    # Deployment Types
+    configurations = envelope.DeploymentOptionSection.Configuration
+    list_deployment_types(configurations, hw_dict)
+
+    # Networks
+    network_section = envelope.NetworkSection
+    list_net_interfaces(network_section)

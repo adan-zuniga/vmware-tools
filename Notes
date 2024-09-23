@@ -1,0 +1,13 @@
+Get vApp Options Configuration vmtoolsd --cmd "info-get guestinfo.ovfEnv"
+
+https://williamlam.com/2011/01/how-to-extract-host-information-from.html
+https://williamlam.com/2012/06/ovf-runtime-environment.html
+
+Create an OVA with vApp Options
+https://www.reddit.com/r/vmware/comments/unhj4q/creating_vapp_reusable_ova/
+https://thevirtualist.org/creating-customizable-linux-ovf-template/https://thevirtualist.org/creating-customizable-linux-ovf-template/
+
+
+# Potential Solution to PyVmOmi Issues:
+
+https://github.com/ansible/ansible/issues/50299

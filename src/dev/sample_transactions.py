@@ -1,5 +1,6 @@
 from pyVim import connect
 from pyVmomi import vim
+from src.utilities import get_vm_by_name
 
 
 def host_details(service_instance):
@@ -125,6 +126,8 @@ def shutdown_cucm(service_instance):
             #     get_dir(net)
 
 
+
+
 if __name__ == '__main__':
     esxi_instance = connect.SmartConnectNoSSL(
         host='172.18.9.5',
@@ -132,5 +135,13 @@ if __name__ == '__main__':
         pwd='l4bp$$D',
         port=443
     )
-    shutdown_cucm(esxi_instance)
-    print()
+    # shutdown_cucm(esxi_instance)
+    # print()
+    my_vm_obj = get_vm_by_name(esxi_instance, 'C2-IMP')
+    print(my_vm_obj)
+
+    cspec = vim.vm.ConfigSpec()
+    config = my_vm_obj.config
+    configSpec = vim.vApp.VmConfigSpec()
+    for prop in config.vAppConfig.property:
+        print(prop.info.id)
