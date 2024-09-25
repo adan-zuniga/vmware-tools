@@ -57,3 +57,5 @@
        `0`
    * Fails Before Reboot.
      * `Install-AdcsCertificationAuthority : Active Directory Certificate Services setup failed with the following error:  A value for the attribute was not in the acceptable range of values. 0x80072082 (WIN32: 8322 ERROR_DS_RANGE_CONSTRAINT)`
+7. ### Add AD USERS:
+   8. `New-ADUser -Name "Dwight Schrute" -SamAccountName "dschrute" -UserPrincipalName "dchrute@podx.ucalpha.com" -Path "CN=Users,DC=podx,DC=ucalpha,DC=com" -OfficePhone "123-456-7890" -AccountPassword (ConvertTo-SecureString "C0c0a123!" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true -ChangePasswordAtLogon $false`
